@@ -1,52 +1,73 @@
 package com.softserve.itacademy.service.impl;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import com.softserve.itacademy.exception.NullEntityReferenceException;
+import com.softserve.itacademy.model.ToDo;
+import com.softserve.itacademy.repository.ToDoRepository;
+import com.softserve.itacademy.service.ToDoService;
 import org.springframework.stereotype.Service;
 
-import com.softserve.itacademy.model.ToDo;
-import com.softserve.itacademy.model.User;
-import com.softserve.itacademy.service.ToDoService;
-import com.softserve.itacademy.service.UserService;
+import javax.persistence.EntityNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ToDoServiceImpl implements ToDoService {
 
-    private UserService userService;
+    private ToDoRepository todoRepository;
 
-    @Autowired
-    public ToDoServiceImpl(UserService userService) {
-        this.userService = userService;
+    public ToDoServiceImpl(ToDoRepository todoRepository) {
+        this.todoRepository = todoRepository;
     }
 
-    public ToDo addTodo(ToDo todo, User user) {
-        // TODO
-        return null;
+    @Override
+    public ToDo create(ToDo todo) {
+        try {
+            return todoRepository.save(todo);
+        } catch (RuntimeException e) {
+            throw new NullEntityReferenceException("To-Do cannot be 'null'");
+        }
     }
 
-    public ToDo updateTodo(ToDo todo) {
-        // TODO
-        return null;
+    @Override
+    public ToDo readById(long id) {
+        Optional<ToDo> optional = todoRepository.findById(id);
+        if (optional.isPresent()) {
+            return optional.get();
+        }
+        throw new EntityNotFoundException("To-Do with id " + id + " not found");
     }
 
-    public void deleteTodo(ToDo todo) {
-        // TODO
+    @Override
+    public ToDo update(ToDo todo) {
+        if (todo != null) {
+            ToDo oldTodo = readById(todo.getId());
+            if (oldTodo != null) {
+                return todoRepository.save(todo);
+            }
+        }
+        throw new NullEntityReferenceException("To-Do cannot be 'null'");
     }
 
+    @Override
+    public void delete(long id) {
+        ToDo todo = readById(id);
+        if (todo != null) {
+            todoRepository.delete(todo);
+        } else {
+            throw new EntityNotFoundException("To-Do with id " + id + " not found");
+        }
+    }
+
+    @Override
     public List<ToDo> getAll() {
-        // TODO
-        return null;
+        List<ToDo> todos = todoRepository.findAll();
+        return todos.isEmpty() ? new ArrayList<>() : todos;
     }
 
-    public List<ToDo> getByUser(User user) {
-        // TODO
-        return null;
+    @Override
+    public List<ToDo> getByUserId(long userId) {
+        List<ToDo> todos = todoRepository.getByUserId(userId);
+        return todos.isEmpty() ? new ArrayList<>() : todos;
     }
-
-    public ToDo getByUserTitle(User user, String title) {
-        // TODO
-        return null;
-    }
-
 }

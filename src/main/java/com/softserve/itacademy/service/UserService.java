@@ -1,17 +1,16 @@
 package com.softserve.itacademy.service;
 
+import com.softserve.itacademy.model.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
+
 import java.util.List;
 
-import com.softserve.itacademy.model.User;
-
 public interface UserService {
-    
-    User addUser(User user);
-
-    User updateUser(User user);
-
-    void deleteUser(User user);
-
+    User create(User user);
+    User readById(long id);
+    User update(User user);
+    void delete(long id);
     List<User> getAll();
+    User getByEmail(String email);
 
 }
