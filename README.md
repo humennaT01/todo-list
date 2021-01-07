@@ -12,6 +12,8 @@
 		Have you ever heard about 'time management'? 
 		If no, it's the best time to learn more about it.
 		</p>
+	   	<div>This app help you to work with one of the most interesting thing that are a part of 'time management' - is a planing your time, 
+		by creating 'todo' lists and adding tasks to them. </div>
 		<br/>
 		<h2>‘ToDo List’ Project</h2>
 		<p>'ToDo List' app allows you, as a user, to create many lists to structure all tasks you have to do.</p>
@@ -22,7 +24,7 @@
 		Only user, whose role is 'admin' can do any changes in list of users. 
 		Next step is to create a 'todo' list by entering a list title.
 		And of course, user can add some tasks to his 'todo' lists. Also each user can add collaborators to his 'todo' list.
-		</div>
+	   	</div>
 		<h4>Opportunities:</h4>
 		<ul>
 			<li>Creating a new User</li>
