@@ -4,6 +4,6 @@
 	   <meta charset="UTF-8">
    </head>
    <body>
-      <p>‘ToDo List’ Project</p>
+      <h2>‘ToDo List’ Project</h2>
    </body>
 </html>
