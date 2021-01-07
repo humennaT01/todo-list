@@ -21,9 +21,7 @@
 		User can see a list of all users in a system, but have no access to manipulate with data. 
 		Only user, whose role is 'admin' can do any changes in list of users. </div>
 	   
-	   
-	   
-	   <h4>Opportunities</h4>
+<h4>Opportunities</h4>
 		<ul>
 			<li>Creating a new User</li>
 			<div>Role 'User'</div>
